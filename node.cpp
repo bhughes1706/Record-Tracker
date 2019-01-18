@@ -3,3 +3,29 @@
 //
 
 #include "node.h"
+
+node::node() {
+
+}
+
+node::node(records *) {
+
+}
+
+node::node(const node &) {
+
+}
+
+node::~node() {
+
+}
+
+int node::display() const {
+    return 0;
+}
+
+int node::edit() {
+    return 0;
+}
+
+

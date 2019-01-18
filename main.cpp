@@ -1,6 +1,6 @@
 #include "records.h"
 
 int main() {
-    cout << "Hello, World!" << endl;
+    cout << "Oh, hi there." << endl;
     return 0;
 }

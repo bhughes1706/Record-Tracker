@@ -14,10 +14,7 @@ public:
     explicit node(records *);
     node(const node &);
     ~node();
-    int compare_id(records *);
-    int compare_id(char *);
     int display() const;
-    int service() const;
     int edit();
 protected:
     records * record;//contains transport
