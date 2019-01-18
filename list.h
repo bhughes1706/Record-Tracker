@@ -16,7 +16,7 @@ public:
     int add(records *&);
     int delete_node(char*);
     int deleteAll();
-    int display(int) const;
+    int display() const;
     int compare(char*);
     int count() const;
     int edit(char*);

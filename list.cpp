@@ -4,9 +4,7 @@
 
 #include "list.h"
 
-list::list() {
-
-}
+list::list() =default;
 
 list::list(const list &) {
 
@@ -28,8 +26,10 @@ list::~list() {
 
 }
 
-int list::display(int) const {
-    return 0;
+int list::display() const {
+    if(!head)
+      return 0;
+    head->display();
 }
 
 int list::compare(char *) {

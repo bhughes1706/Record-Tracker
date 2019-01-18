@@ -9,18 +9,34 @@
 
 using namespace std;
 
-struct record_info{
+class record_info{
+public:
+    int display();
+    int edit();
+
 protected:
-    int year;
+    string catalog_id;
+    string artist;
+    string album;
+    string label;
+    string format;
+    int rating;
+    int released;
+    int release_id;
+    string collection_folder;
+    string date_added;
+    string media_condition;
+    string sleeve_condition;
+    string notes;
+
     float purchase_price;
     float value;
     bool boxset;
     bool seven;
-    string artist;
-    string album;
 };
 
 class records {
+public:
     virtual int display() = 0; //pure virtual
     records(const records &);
     virtual int edit();

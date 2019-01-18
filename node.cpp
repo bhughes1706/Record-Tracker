@@ -21,6 +21,8 @@ node::~node() {
 }
 
 int node::display() const {
+    if(record)
+        return record->display();
     return 0;
 }
 
