@@ -19,7 +19,8 @@ public:
     int display() const;
     int compare(char*);
     int count() const;
-    int edit(char*);
+    int edit(string entry);
+    int add();
 protected:
     node * head;//beginning of DLL
     int deleteAll(node *&);

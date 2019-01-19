@@ -10,9 +10,9 @@
 
 class boxset: public records {
 public:
-    int display();
+    int display() override;
     boxset(const boxset &);
-    int edit();
+    int edit() override;
     void display_options() const override;
 protected:
     int no_records;

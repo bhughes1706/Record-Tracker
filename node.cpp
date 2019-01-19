@@ -30,4 +30,9 @@ int node::edit() {
     return 0;
 }
 
+node *& node::get_next() {
+    if(next)
+        return next;
+}
+
 

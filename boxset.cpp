@@ -5,11 +5,12 @@
 #include "boxset.h"
 
 int boxset::display() {
+    records::display();
     return 0;
 }
 
 int boxset::edit() {
-
+    return 0;
 }
 
 void boxset::display_options() const {

@@ -22,14 +22,12 @@ int list::deleteAll() {
     return 0;
 }
 
-list::~list() {
-
-}
+list::~list()=default;
 
 int list::display() const {
     if(!head)
       return 0;
-    head->display();
+    return head->display();
 }
 
 int list::compare(char *) {
@@ -40,11 +38,14 @@ int list::count() const {
     return 0;
 }
 
-int list::edit(char *) {
+int list::edit(string entry) {
     return 0;
 }
 
 int list::deleteAll(node *&) {
+    if(!head)
+        return 0;
+    deleteAll(head->get_next());
     return 0;
 }
 
@@ -72,6 +73,7 @@ int list::count(node *head) const {
     return 0;
 }
 
-int list::edit(node *&, char *) {
+int list::add() {
+
     return 0;
 }

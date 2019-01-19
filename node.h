@@ -16,8 +16,10 @@ public:
     ~node();
     int display() const;
     int edit();
+    node *& get_next();
 protected:
     records * record;//contains transport
+    node * next;
 };
 
 
