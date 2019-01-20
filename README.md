@@ -1,4 +1,5 @@
 # Record-Tracker
+**IN EARLY DEVELOPMENT**
 
 tracks record collection and value fluctuations
 
