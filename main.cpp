@@ -1,25 +1,30 @@
 #include "records.h"
 #include "main.h"
 #include "list.h"
+#include "seven.h"
+#include "seventy_eights.h"
+#include "boxset.h"
 
 int main() {
     int selector;
     list list;
 
-    cout << "\nThis program tracks the performance of your record collection."
-         << "\nYou must have a Discogs collection to use this program."
-         << "\nIf you haven't already, download your Discogs collection via "
-         << "\nExport -> Collection -> Export Collection Data"
-         << "\nThis should give you a .csv document to work with";
+    cout << "\nThis program tracks the performance of your record collection.";
+    /*<< "\nYou must have a Discogs collection to use this program."
+    << "\nIf you haven't already, download your Discogs collection via "
+    << "\nExport -> Collection -> Export Collection Data"
+    << "\nThis should give you a .csv document to work with";*/
 
-    selector = menu();
-
-    switch(selector) {
-        case 1: import(); break;
-        case 2: display(list); break;
-        case 3: edit(list); break;
-        case 4: delete_item();
-    }
+    do {
+        selector = menu();
+        switch (selector) {
+            case 1: import(list); break;
+            case 2: display_all(list); break;
+            case 3: edit(list); break;
+            case 4: delete_item(list);
+            default: break;
+        }
+    } while(selector != 5);
     return 0;
 }
 
@@ -41,12 +46,31 @@ int menu() {
     return selector;
 }
 
-int import(){
+int import(list & list){
+    int selector = 0;
+    do {
+        cout << "\n\n1) Import a .txt file\n"
+             << "2) Import .csv file\n";
+        cin >> selector; cin.ignore(1000, '\n');
+        if(cin.fail()){
+            cin.clear();
+            cin.ignore(1000, '\n');
+            selector = 0;
+        }
+        if(selector > 2 || selector <= 0)
+            cout << "\n\nPlease enter valid number.";
+    } while (selector > 2 || selector <= 0);
+
+    switch(selector){
+        case 1: list.importtxt(); break;
+        case 2: list.importcsv(); break;
+        default: break;
+    }
     return 0;
 }
 
-int display(list & list){
-    list.display();
+int display_all(list & list){
+    list.display_all();
     return 0;
 }
 
@@ -69,6 +93,7 @@ int edit(list & list){
     switch(selector){
         case 1: add(list); break;
         case 2: edit(list);
+        default: break;
     }
     cout << "\n\nWhat artist would you like to edit?\n";
     cin >> name_entry;
@@ -76,7 +101,11 @@ int edit(list & list){
     return 0;
 }
 
-int delete_item(){
+int delete_item(list & list){
+    string artist_name;
+    cout << "\nWhat artists would you like to delete?\n";
+    cin >> artist_name;
+    list.delete_record(artist_name);
     return 0;
 }
 

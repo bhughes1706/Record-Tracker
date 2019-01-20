@@ -16,21 +16,24 @@ public:
     int add(records *&);
     int delete_node(char*);
     int deleteAll();
-    int display() const;
+    int display_all() const;
     int compare(char*);
     int count() const;
     int edit(string entry);
     int add();
+    int delete_record(string);
+    void importtxt();
+    void importcsv();
 protected:
     node * head;//beginning of DLL
     int deleteAll(node *&);
     void add_all(const node*, node*&);
     int add(node *&, records *&);
     int delete_node(node *&, char*);
-    int display(const node *, int) const;
     int compare(node*, char*);
     int count(node * head) const;
     int edit(node *&,char*);
+    void importtxt_given(string input);
 };
 
 

@@ -2,6 +2,8 @@
   <dictionary name="Brian">
     <words>
       <w>boxset</w>
+      <w>importcsv</w>
+      <w>importtxt</w>
     </words>
   </dictionary>
 </component>

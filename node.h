@@ -5,7 +5,6 @@
 #ifndef RECORD_TRACKER_NODE_H
 #define RECORD_TRACKER_NODE_H
 
-
 #include "records.h"
 
 class node {
@@ -14,7 +13,7 @@ public:
     explicit node(records *);
     node(const node &);
     ~node();
-    int display() const;
+    int display_all() const;
     int edit();
     node *& get_next();
 protected:

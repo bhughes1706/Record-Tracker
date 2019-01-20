@@ -8,10 +8,10 @@
 
 //prototypes for main.cpp
 int menu();
-int import();
-int display(list &);
+int import(list &);
+int display_all(list &);
 int edit(list &);
-int delete_item();
+int delete_item(list &);
 int add(list &);
 
 #endif //RECORD_TRACKER_MAIN_H

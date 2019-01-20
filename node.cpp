@@ -20,10 +20,11 @@ node::~node() {
 
 }
 
-int node::display() const {
+int node::display_all() const {
+    int count = 0;
     if(record)
-        return record->display();
-    return 0;
+        count = record->display();
+    return next->display_all() + count;
 }
 
 int node::edit() {
@@ -31,8 +32,7 @@ int node::edit() {
 }
 
 node *& node::get_next() {
-    if(next)
-        return next;
+    return next;
 }
 
 

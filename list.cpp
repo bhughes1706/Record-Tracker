@@ -3,6 +3,9 @@
 //
 
 #include "list.h"
+#include <string>
+#include <iostream>
+using namespace std;
 
 list::list() =default;
 
@@ -24,10 +27,12 @@ int list::deleteAll() {
 
 list::~list()=default;
 
-int list::display() const {
+int list::display_all() const {
     if(!head)
       return 0;
-    return head->display();
+    int count = 0;
+    count = head->display_all();
+    return head->get_next()->display_all() + count;
 }
 
 int list::compare(char *) {
@@ -61,10 +66,6 @@ int list::delete_node(node *&, char *) {
     return 0;
 }
 
-int list::display(const node *, int) const {
-    return 0;
-}
-
 int list::compare(node *, char *) {
     return 0;
 }
@@ -74,6 +75,36 @@ int list::count(node *head) const {
 }
 
 int list::add() {
+    return 0;
+}
 
+int list::delete_record(string) {
+    return 0;
+}
+
+void list::importtxt() {
+  string input;
+  cout << "\nRemember to keep style: catalog_id, artist, album, label\n"
+       << "format, rating, released, release_id, collection_folder, date_added\n"
+       << "media_condition, sleeve_condition, and notes\n"
+       << "Everything should be on a new line. Format should be 2xLP, LP, 78, box, or 7.\n"
+       << "What is the .txt path file on your computer? ";
+  getline(cin, input);
+
+  importtxt_given(input);
+}
+
+void list::importcsv() {
+
+}
+
+void list::importtxt_given(string input) {
+  if(input.length() == 0)
+      return;
+
+
+}
+
+int list::edit(node *&, char *) {
     return 0;
 }
