@@ -17,6 +17,8 @@ public:
     node & operator=(const node &);
     int edit();
     node *& get_next();
+    int count() const;
+    int add(records *& to_add);
 protected:
     records * record;//contains transport
     node * next;

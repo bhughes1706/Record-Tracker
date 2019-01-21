@@ -8,7 +8,6 @@
 #include "boxset.h"
 #include "seven.h"
 
-
 node::node() {
     record = nullptr;
     next = nullptr;
@@ -36,6 +35,7 @@ node::node(records * new_record) {
     auto * box = dynamic_cast<boxset*>(new_record);
     if(box)
         record = box;
+    next = nullptr;
 }
 
 node::node(const node & copy) {
@@ -74,6 +74,35 @@ node & node::operator=(const node & copy) {
     record = copy.record;
     next = copy.next;
     return *this;
+}
+
+int node::count() const {
+    if(!next)
+        return 1;
+    return next->count() + 1;
+}
+
+
+int node::add(records *& to_add) {
+    int result = 0;
+    node * current = this;
+    node * previous = nullptr;
+
+    while(result > 0) {
+        result = to_add->get_artist().compare(record->get_artist());
+        if(result > 0 && next){
+            previous = current;
+            current = next;
+        }
+        else{
+            node * temp = new node(to_add);
+            temp->next = current->next;
+            current->next = temp;
+            if(previous)
+                previous->next = current;
+        }
+    }
+    return result;
 }
 
 

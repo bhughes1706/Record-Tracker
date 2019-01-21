@@ -13,6 +13,9 @@ class record_info{
 public:
     int display();
     int edit();
+    string get_artist() {
+        return artist;
+    }
 
 protected:
     string catalog_id;
@@ -41,6 +44,7 @@ public:
     virtual~records()=default;
     virtual int edit();
     virtual void display_options() const;
+    string get_artist();
 protected:
     //CANNOT allocate memory for this object
     records();

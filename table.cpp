@@ -1,6 +1,6 @@
 //
-// Created by Brian Hughes on 2019-01-18.
-//
+// This is the table, which is a array of LLL. I'm avoiding templates, because
+// I need the practice and I'm a glutton for punishment, apparently
 
 char DELIM = ',';
 
@@ -25,7 +25,17 @@ table::table(const table & copy) {
         head[i] = copy.head[i];
 }
 
-int table::add(records *&) {
+int table::add(records *& to_add) {
+    string artist = to_add->get_artist();
+    int hash = this->hash(artist);
+
+    if(!head[hash]) {
+        head[hash] = new node(to_add);
+        return 1;
+    }
+
+    if(head[hash]->add(to_add))
+        return 1;
     return 0;
 }
 
@@ -37,7 +47,11 @@ int table::deleteAll() {
     return 0;
 }
 
-table::~table()=default;
+table::~table(){
+    int i = 0;
+    for(; i < index; ++i)
+        delete head[i];
+}
 
 int table::display_all() const {
     if(!head)
@@ -55,7 +69,12 @@ int table::compare(char *) {
 }
 
 int table::count() const {
-    return 0;
+    int count = 0, i = 0;
+    for(; i < index; ++i) {
+        if(head[i])
+            count += head[i]->count();
+    }
+    return count;
 }
 
 int table::edit(string entry) {
@@ -118,7 +137,9 @@ void table::importcsv() {
          << "What is the .csv path file on your computer? ";
     getline(cin, input);
 
-    importcsv_given(input);
+    //importcsv_given(input);
+
+    importcsv_given("record_collection.csv");
 }
 
 void table::importtxt_given(string input) {
@@ -133,7 +154,7 @@ void table::importcsv_given(string input) {
     if(input.empty())
         return;
     ifstream file;
-    file.open("record_collection.csv");
+    file.open(input);
     string temp;
 
     if(file){

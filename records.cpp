@@ -30,6 +30,10 @@ int records::edit_object() {
     return 0;
 }
 
+string records::get_artist() {
+    return info.get_artist();
+}
+
 int record_info::display() {
     cout << "\n\nCatalog ID: " << catalog_id
          << "\nArtist: " << artist << "\nAlbum: " << album
