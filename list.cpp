@@ -2,12 +2,21 @@
 // Created by Brian Hughes on 2019-01-18.
 //
 
+char DELIM = ',';
+
 #include "list.h"
-#include <string>
+#include <cstring>
 #include <iostream>
+#include <fstream>
+
 using namespace std;
 
-list::list() =default;
+list::list(){
+    index = 29;
+    head = new node * [index];
+    for(int i = 0; index > i; ++i)
+        head[i] = nullptr;
+}
 
 list::list(const list &) {
 
@@ -31,8 +40,8 @@ int list::display_all() const {
     if(!head)
       return 0;
     int count = 0;
-    count = head->display_all();
-    return head->get_next()->display_all() + count;
+    //count = head->display_all();
+    //return head->get_next()->display_all() + count;
 }
 
 int list::compare(char *) {
@@ -50,7 +59,7 @@ int list::edit(string entry) {
 int list::deleteAll(node *&) {
     if(!head)
         return 0;
-    deleteAll(head->get_next());
+    //deleteAll(head->get_next());
     return 0;
 }
 
@@ -95,16 +104,41 @@ void list::importtxt() {
 }
 
 void list::importcsv() {
+    string input;
+    cout << "\nRemember to keep style: catalog_id, artist, album, label\n"
+         << "format, rating, released, release_id, collection_folder, date_added\n"
+         << "media_condition, sleeve_condition, and notes\n"
+         << "Everything should be on a new line. Format should be 2xLP, LP, 78, box, or 7.\n"
+         << "What is the .txt path file on your computer? ";
+    getline(cin, input);
 
+    importcsv_given(input);
 }
 
 void list::importtxt_given(string input) {
-  if(input.length() == 0)
+  if(input.empty())
       return;
+  ifstream file;
+  file.open("record_collection.csv");
+  string temp;
+
+  if(file){
+    getline(file, temp, DELIM);
 
 
+  }
 }
 
 int list::edit(node *&, char *) {
+    return 0;
+}
+
+void list::importcsv_given(string input) {
+    if(input.length() == 0)
+        return;
+
+}
+
+int list::hash(string) {
     return 0;
 }

@@ -25,7 +25,8 @@ public:
     void importtxt();
     void importcsv();
 protected:
-    node * head;//beginning of DLL
+    node ** head; //array of LLL
+    int index;
     int deleteAll(node *&);
     void add_all(const node*, node*&);
     int add(node *&, records *&);
@@ -34,6 +35,8 @@ protected:
     int count(node * head) const;
     int edit(node *&,char*);
     void importtxt_given(string input);
+    void importcsv_given(string input);
+    int hash(string);
 };
 
 

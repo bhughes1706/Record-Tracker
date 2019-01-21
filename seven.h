@@ -5,13 +5,14 @@
 #ifndef RECORD_TRACKER_SEVEN_H
 #define RECORD_TRACKER_SEVEN_H
 
+#include "records.h"
 
-class seven {
+class seven: public records {
 public:
-    int display();
+    int display() override;
     seven(const seven &);
-    int edit();
-    void display_options() const;
+    int edit() override;
+    void display_options() const override;
 };
 
 
