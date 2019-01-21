@@ -14,6 +14,7 @@ public:
     node(const node &);
     ~node();
     int display_all() const;
+    node & operator=(const node &);
     int edit();
     node *& get_next();
 protected:

@@ -38,12 +38,13 @@ protected:
 class records {
 public:
     virtual int display() = 0; //pure virtual
-    records(const records &);
+    virtual~records()=default;
     virtual int edit();
     virtual void display_options() const;
 protected:
     //CANNOT allocate memory for this object
     records();
+    records(const records &);
     explicit records(struct record_info &);
     int edit_object();
     record_info info;

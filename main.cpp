@@ -1,13 +1,13 @@
 #include "records.h"
 #include "main.h"
-#include "list.h"
+#include "table.h"
 #include "seven.h"
 #include "seventy_eights.h"
 #include "boxset.h"
 
 int main() {
     int selector;
-    list list;
+    table table;
 
     cout << "\nThis program tracks the performance of your record collection.";
     /*<< "\nYou must have a Discogs collection to use this program."
@@ -18,10 +18,10 @@ int main() {
     do {
         selector = menu();
         switch (selector) {
-            case 1: import(list); break;
-            case 2: display_all(list); break;
-            case 3: edit(list); break;
-            case 4: delete_item(list);
+            case 1: import(table); break;
+            case 2: display_all(table); break;
+            case 3: edit(table); break;
+            case 4: delete_item(table);
             default: break;
         }
     } while(selector != 5);
@@ -46,7 +46,7 @@ int menu() {
     return selector;
 }
 
-int import(list & list){
+int import(table & table){
     int selector = 0;
     do {
         cout << "\n\n1) Import a .txt file\n"
@@ -62,19 +62,19 @@ int import(list & list){
     } while (selector > 2 || selector <= 0);
 
     switch(selector){
-        case 1: list.importtxt(); break;
-        case 2: list.importcsv(); break;
+        case 1: table.importtxt(); break;
+        case 2: table.importcsv(); break;
         default: break;
     }
     return 0;
 }
 
-int display_all(list & list){
-    list.display_all();
+int display_all(table & table){
+    table.display_all();
     return 0;
 }
 
-int edit(list & list){
+int edit(table & table){
     string name_entry;
     int selector;
     do{
@@ -91,25 +91,25 @@ int edit(list & list){
     }while(selector == 2 || selector == 1);
 
     switch(selector){
-        case 1: add(list); break;
-        case 2: edit(list);
+        case 1: add(table); break;
+        case 2: edit(table);
         default: break;
     }
     cout << "\n\nWhat artist would you like to edit?\n";
     cin >> name_entry;
-    list.edit(name_entry);
+    table.edit(name_entry);
     return 0;
 }
 
-int delete_item(list & list){
+int delete_item(table & table){
     string artist_name;
     cout << "\nWhat artists would you like to delete?\n";
     cin >> artist_name;
-    list.delete_record(artist_name);
+    table.delete_record(artist_name);
     return 0;
 }
 
-int add(list & list){
-    list.add();
+int add(table & table){
+    table.add();
     return 0;
 }

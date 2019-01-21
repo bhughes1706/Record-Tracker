@@ -16,3 +16,7 @@ int boxset::edit() {
 void boxset::display_options() const {
 
 }
+
+boxset::boxset(const boxset & boxset) {
+    info = boxset.info;
+}

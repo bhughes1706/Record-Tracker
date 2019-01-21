@@ -8,11 +8,11 @@
 #include "node.h"
 #include "records.h"
 
-class list {
+class table {
 public:
-    list();
-    list(const list &);
-    ~list();
+    table();
+    table(const table &);
+    ~table();
     int add(records *&);
     int delete_node(char*);
     int deleteAll();

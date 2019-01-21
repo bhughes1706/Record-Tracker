@@ -4,94 +4,100 @@
 
 char DELIM = ',';
 
-#include "list.h"
+#include "table.h"
 #include <cstring>
 #include <iostream>
 #include <fstream>
 
 using namespace std;
 
-list::list(){
+table::table(){
     index = 29;
     head = new node * [index];
     for(int i = 0; index > i; ++i)
         head[i] = nullptr;
 }
 
-list::list(const list &) {
-
+table::table(const table & copy) {
+    index = copy.index;
+    head = new node * [index];
+    for(int i = 0; index > i; ++i)
+        head[i] = copy.head[i];
 }
 
-int list::add(records *&) {
+int table::add(records *&) {
     return 0;
 }
 
-int list::delete_node(char *) {
+int table::delete_node(char *) {
     return 0;
 }
 
-int list::deleteAll() {
+int table::deleteAll() {
     return 0;
 }
 
-list::~list()=default;
+table::~table()=default;
 
-int list::display_all() const {
+int table::display_all() const {
     if(!head)
       return 0;
     int count = 0;
-    //count = head->display_all();
-    //return head->get_next()->display_all() + count;
+    for(int i = 0; i < index; ++i) {
+        if(head[i])
+            count += head[i]->display_all();
+    }
+    return count;
 }
 
-int list::compare(char *) {
+int table::compare(char *) {
     return 0;
 }
 
-int list::count() const {
+int table::count() const {
     return 0;
 }
 
-int list::edit(string entry) {
+int table::edit(string entry) {
     return 0;
 }
 
-int list::deleteAll(node *&) {
+int table::deleteAll(node *&) {
     if(!head)
         return 0;
     //deleteAll(head->get_next());
     return 0;
 }
 
-void list::add_all(const node *, node *&) {
+void table::add_all(const node *, node *&) {
 
 }
 
-int list::add(node *&, records *&) {
+int table::add(node *&, records *&) {
     return 0;
 }
 
-int list::delete_node(node *&, char *) {
+int table::delete_node(node *&, char *) {
     return 0;
 }
 
-int list::compare(node *, char *) {
+int table::compare(node *, char *) {
     return 0;
 }
 
-int list::count(node *head) const {
+int table::count(node *head) const {
     return 0;
 }
 
-int list::add() {
+int table::add() {
     return 0;
 }
 
-int list::delete_record(string) {
+int table::delete_record(string) {
     return 0;
 }
 
-void list::importtxt() {
+void table::importtxt() {
   string input;
   cout << "\nRemember to keep style: catalog_id, artist, album, label\n"
        << "format, rating, released, release_id, collection_folder, date_added\n"
@@ -103,42 +109,43 @@ void list::importtxt() {
   importtxt_given(input);
 }
 
-void list::importcsv() {
+void table::importcsv() {
     string input;
     cout << "\nRemember to keep style: catalog_id, artist, album, label\n"
          << "format, rating, released, release_id, collection_folder, date_added\n"
          << "media_condition, sleeve_condition, and notes\n"
          << "Everything should be on a new line. Format should be 2xLP, LP, 78, box, or 7.\n"
-         << "What is the .txt path file on your computer? ";
+         << "What is the .csv path file on your computer? ";
     getline(cin, input);
 
     importcsv_given(input);
 }
 
-void list::importtxt_given(string input) {
-  if(input.empty())
-      return;
-  ifstream file;
-  file.open("record_collection.csv");
-  string temp;
+void table::importtxt_given(string input) {
 
-  if(file){
-    getline(file, temp, DELIM);
-
-
-  }
 }
 
-int list::edit(node *&, char *) {
+int table::edit(node *&, char *) {
     return 0;
 }
 
-void list::importcsv_given(string input) {
-    if(input.length() == 0)
+void table::importcsv_given(string input) {
+    if(input.empty())
         return;
+    ifstream file;
+    file.open("record_collection.csv");
+    string temp;
 
+    if(file){
+        getline(file, temp, DELIM);
+    }
 }
 
-int list::hash(string) {
-    return 0;
+int table::hash(string artist) {
+    int total = 0, i = 0;
+    //counts each character
+    for(; i < artist.length(); ++i){
+        artist[i] += total;
+    }
+    return total % index;
 }
