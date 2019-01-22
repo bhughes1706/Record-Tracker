@@ -4,18 +4,11 @@
 
 #include "twelve.h"
 
-int twelve::display() {
-    return 0;
-}
-
-twelve::twelve(const twelve &) {
-
-}
-
 int twelve::edit() {
     return records::edit();
 }
 
-void twelve::display_options() const {
+int twelve::display_options() const {
     records::display_options();
+    return 0;
 }

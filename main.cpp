@@ -112,6 +112,6 @@ int delete_item(table & table){
 }
 
 int add(table & table){
-    table.add();
+    //table.add();
     return 0;
 }

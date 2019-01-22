@@ -12,7 +12,9 @@ using namespace std;
 class record_info{
 public:
     int display();
-    int edit();
+    int display_options() const;
+    void edit_string(int, string);
+    void edit_int(int, int);
     string get_artist() const {
         return artist;
     }
@@ -45,18 +47,22 @@ class records {
 public:
     virtual int display() = 0; //pure virtual
     virtual int edit();
-    virtual void display_options() const;
+    virtual int display_options() const {
+        return info.display_options();
+    };
     string get_artist() const {
         return info.get_artist();
     };
     string get_album() const {
         return info.get_album();
     }
+    string enter_string();
+    int enter_number();
 
 protected:
     //CANNOT allocate memory for this object
     records()=default;
-    int edit_object();
+    int edit_object(int);
     record_info info;
 };
 

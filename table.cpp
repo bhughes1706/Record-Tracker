@@ -67,21 +67,17 @@ int table::delete_node(string & artist, string & album) {
         if(current->get_next()) {
             head[hash] = current->get_next();
         delete current;
+        return 1;
         }
     }
 
-
-    return 0;
-}
-
-int table::deleteAll() {
     return 0;
 }
 
 table::~table(){
     int i = 0;
     for(; i < index; ++i)
-        delete head[i];
+        deleteAll(head[i]);
 }
 
 int table::display_all() const {
@@ -108,23 +104,11 @@ int table::edit(string entry) {
     return 0;
 }
 
-int table::deleteAll(node *&) {
+void table::deleteAll(node *& head) {
     if(!head)
-        return 0;
-    //deleteAll(head->get_next());
-    return 0;
-}
-
-void table::add_all(const node *, node *&) {
-
-}
-
-int table::count(node *head) const {
-    return 0;
-}
-
-int table::add() {
-    return 0;
+        return;
+    deleteAll(head->get_next());
+    delete head;
 }
 
 void table::importtxt() {
@@ -157,8 +141,18 @@ void table::importtxt_given(string input) {
 
 }
 
-int table::edit(node *&, char *) {
-    return 0;
+int table::edit(string & artist, string & album) {
+    int hash = this->hash(artist);
+    node * current = head[hash];
+
+    while(current->get_artist() != artist || current->get_album() != album){
+        if(!current->get_next())
+            current = current->get_next();
+        else
+            return 0;
+    }
+
+    return current->edit();
 }
 
 void table::importcsv_given(string input) {
@@ -173,7 +167,7 @@ void table::importcsv_given(string input) {
     }
 }
 
-int table::hash(string artist) {
+int table::hash(string & artist) {
     int total = 0, i = 0;
     //counts each character
     for(; i < artist.length(); ++i){

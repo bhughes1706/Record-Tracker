@@ -49,8 +49,7 @@ node::node(const node & copy) {
     if(box)
         record = box;
 
-    if(next)
-        next = new node(*copy.next);
+    next = nullptr;
 }
 
 int node::display_all() const {
@@ -60,10 +59,6 @@ int node::display_all() const {
     if(next)
         return next->display_all() + count;
     return count;
-}
-
-int node::edit() {
-    return 0;
 }
 
 node & node::operator=(const node & copy) {
@@ -86,8 +81,8 @@ node & node::operator=(const node & copy) {
     if(box)
         record = box;
 
-    if(copy.next)
-        next = new node(*copy.next);
+    next = nullptr;
+
     return *this;
 }
 

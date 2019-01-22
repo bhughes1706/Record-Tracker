@@ -1,5 +1,5 @@
 // Nodes for LLLs, contained in table
-// Simple functions implemented here, althoughs in .cpp
+// Simple functions implemented here, ell else in .cpp
 
 
 #ifndef RECORD_TRACKER_NODE_H
@@ -18,7 +18,9 @@ public:
     };
     int display_all() const;
     node & operator=(const node &);
-    int edit();
+    int edit() {
+        return record->edit();
+    };
     node *& get_next() { return next; };
     int count() const;
     int added() const {

@@ -8,10 +8,11 @@
 #include "records.h"
 
 class seventy_eights: public records {
-    int display() override;
-    seventy_eights(const seventy_eights &);
+    int display() override {
+        return records::display();
+    };
     int edit() override;
-    void display_options() const override;
+    int display_options() const override;
 };
 
 

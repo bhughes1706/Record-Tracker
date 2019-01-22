@@ -9,10 +9,11 @@
 
 class seven: public records {
 public:
-    int display() override;
-    seven(const seven &);
+    int display() override {
+        return records::display();
+    };
     int edit() override;
-    void display_options() const override;
+    int display_options() const override;
 };
 
 

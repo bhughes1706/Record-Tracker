@@ -4,19 +4,14 @@
 
 #include "boxset.h"
 
-int boxset::display() {
-    records::display();
-    return 0;
-}
-
 int boxset::edit() {
+    records::display_options();
+    cout << "";
     return 0;
 }
 
-void boxset::display_options() const {
+int boxset::display_options() const {
 
+    return 0;
 }
 
-boxset::boxset(const boxset & boxset) {
-    info = boxset.info;
-}

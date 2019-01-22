@@ -4,18 +4,11 @@
 
 #include "seven.h"
 
-void seven::display_options() const {
+int seven::display_options() const {
 
-}
-
-int seven::edit() {
     return 0;
 }
 
-seven::seven(const seven &) {
-
-}
-
-int seven::display() {
+int seven::edit() {
     return 0;
 }

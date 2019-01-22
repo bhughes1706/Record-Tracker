@@ -15,24 +15,20 @@ public:
     ~table();
     int add(records *&);
     int delete_node(string&, string&);
-    int deleteAll();
     int display_all() const;
     int count() const;
     int edit(string entry);
-    int add();
     void importtxt();
     void importcsv();
+    int edit(string&, string&);
 protected:
     node ** head; //array of LLL
     int index;
-    int deleteAll(node *&);
-    void add_all(const node*, node*&);
+    void deleteAll(node *&);
     int add(node *&, records *&);
-    int count(node * head) const;
-    int edit(node *&,char*);
-    void importtxt_given(string input);
-    void importcsv_given(string input);
-    int hash(string);
+    void importtxt_given(string);
+    void importcsv_given(string);
+    int hash(string&);
 };
 
 
