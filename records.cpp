@@ -2,20 +2,11 @@
 
 #include "records.h"
 
-records::records() = default;
-
-records::records(record_info & copy){
-    info = copy;
-}
 
 int records::display(){
     if(info.display())
         return 1;
     return 0;
-}
-
-records::records(const records & copy){
-    info = copy.info;
 }
 
 int records::edit() {
@@ -28,10 +19,6 @@ void records::display_options() const {
 
 int records::edit_object() {
     return 0;
-}
-
-string records::get_artist() {
-    return info.get_artist();
 }
 
 int record_info::display() {

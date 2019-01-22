@@ -14,14 +14,12 @@ public:
     table(const table &);
     ~table();
     int add(records *&);
-    int delete_node(char*);
+    int delete_node(string&, string&);
     int deleteAll();
     int display_all() const;
-    int compare(char*);
     int count() const;
     int edit(string entry);
     int add();
-    int delete_record(string);
     void importtxt();
     void importcsv();
 protected:
@@ -30,8 +28,6 @@ protected:
     int deleteAll(node *&);
     void add_all(const node*, node*&);
     int add(node *&, records *&);
-    int delete_node(node *&, char*);
-    int compare(node*, char*);
     int count(node * head) const;
     int edit(node *&,char*);
     void importtxt_given(string input);

@@ -1,6 +1,6 @@
-//
-// Created by Brian Hughes on 2019-01-18.
-//
+// Nodes for LLLs, contained in table
+// Simple functions implemented here, althoughs in .cpp
+
 
 #ifndef RECORD_TRACKER_NODE_H
 #define RECORD_TRACKER_NODE_H
@@ -9,16 +9,27 @@
 
 class node {
 public:
-    node();
+    node()=default;
     explicit node(records *);
-    node(const node &);
-    ~node();
+    explicit node(const node &);
+    ~node() {
+        record = nullptr;
+        next = nullptr;
+    };
     int display_all() const;
     node & operator=(const node &);
     int edit();
-    node *& get_next();
+    node *& get_next() { return next; };
     int count() const;
-    int add(records *& to_add);
+    int added() const {
+        return record ? 1 : 0;
+    } //implemented here
+    string get_artist() const {
+        return record->get_artist();
+    };
+    string get_album() const {
+        return record->get_album();
+    }
 protected:
     records * record;//contains transport
     node * next;

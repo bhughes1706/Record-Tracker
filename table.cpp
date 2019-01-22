@@ -1,11 +1,10 @@
-//
-// This is the table, which is a array of LLL. I'm avoiding templates, because
+// This is the table, which is an array of LLL. I'm avoiding templates, because
 // I need the practice and I'm a glutton for punishment, apparently
 
 char DELIM = ',';
 
 #include "table.h"
-#include <cstring>
+#include <string>
 #include <iostream>
 #include <fstream>
 
@@ -34,12 +33,44 @@ int table::add(records *& to_add) {
         return 1;
     }
 
-    if(head[hash]->add(to_add))
-        return 1;
+    return this->add(head[hash], to_add) ? 1 : 0;
+}
+
+int table::add(node *& head, records *& record) {
+    node *current = head;
+
+    while (current->get_next() && current->get_next()->get_artist().compare(record->get_artist()) > 0) {
+        current = current->get_next();
+
+        node *temp = new node(record);
+        if (temp->added()) {
+            temp->get_next() = current->get_next();
+            current->get_next() = temp;
+            return 1;
+        } else
+            return 0;
+    }
     return 0;
 }
 
-int table::delete_node(char *) {
+int table::delete_node(string & artist, string & album) {
+    int hash = this->hash(artist);
+    node * current = head[hash];
+
+    while(current->get_artist() != artist || current->get_album() != album){
+        if(current->get_next())
+            current = current->get_next();
+        else
+            return 0;
+    }
+    if(this->head[hash] == current){
+        if(current->get_next()) {
+            head[hash] = current->get_next();
+        delete current;
+        }
+    }
+
+
     return 0;
 }
 
@@ -62,10 +93,6 @@ int table::display_all() const {
             count += head[i]->display_all();
     }
     return count;
-}
-
-int table::compare(char *) {
-    return 0;
 }
 
 int table::count() const {
@@ -92,27 +119,11 @@ void table::add_all(const node *, node *&) {
 
 }
 
-int table::add(node *&, records *&) {
-    return 0;
-}
-
-int table::delete_node(node *&, char *) {
-    return 0;
-}
-
-int table::compare(node *, char *) {
-    return 0;
-}
-
 int table::count(node *head) const {
     return 0;
 }
 
 int table::add() {
-    return 0;
-}
-
-int table::delete_record(string) {
     return 0;
 }
 

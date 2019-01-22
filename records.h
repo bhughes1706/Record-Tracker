@@ -13,8 +13,11 @@ class record_info{
 public:
     int display();
     int edit();
-    string get_artist() {
+    string get_artist() const {
         return artist;
+    }
+    string get_album() const {
+        return album;
     }
 
 protected:
@@ -41,15 +44,18 @@ protected:
 class records {
 public:
     virtual int display() = 0; //pure virtual
-    virtual~records()=default;
     virtual int edit();
     virtual void display_options() const;
-    string get_artist();
+    string get_artist() const {
+        return info.get_artist();
+    };
+    string get_album() const {
+        return info.get_album();
+    }
+
 protected:
     //CANNOT allocate memory for this object
-    records();
-    records(const records &);
-    explicit records(struct record_info &);
+    records()=default;
     int edit_object();
     record_info info;
 };

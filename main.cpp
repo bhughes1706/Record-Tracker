@@ -102,10 +102,12 @@ int edit(table & table){
 }
 
 int delete_item(table & table){
-    string artist_name;
+    string artist, album;
     cout << "\nWhat artists would you like to delete?\n";
-    cin >> artist_name;
-    table.delete_record(artist_name);
+    cin >> artist;
+    cout << "\nWhat album would you like to delete?\n";
+    cin >> album;
+    table.delete_node(artist, album);
     return 0;
 }
 
