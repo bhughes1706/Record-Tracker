@@ -1,3 +1,4 @@
+#include <fstream>
 #include "records.h"
 #include "main.h"
 #include "table.h"
@@ -7,6 +8,7 @@
 
 int main() {
     int selector;
+    char yesno;
     table table;
 
     cout << "\nThis program tracks the performance of your record collection.";
@@ -14,6 +16,21 @@ int main() {
     << "\nIf you haven't already, download your Discogs collection via "
     << "\nExport -> Collection -> Export Collection Data"
     << "\nThis should give you a .csv document to work with";*/
+
+    do {
+        cout << "\nAre you an existing user? (Y/N): ";
+        cin >> yesno; cin.ignore(1000, '\n');
+        if(cin.fail()){
+            cin.clear();
+            cin.ignore(1000, '\n');
+        }
+        yesno = toupper(yesno);
+    } while (yesno != 'Y' && yesno != 'N');
+
+    if(yesno == 'Y')
+        load_user(table);
+    else if(yesno == 'N')
+        add_user(table);
 
     do {
         selector = menu();
@@ -25,6 +42,39 @@ int main() {
             default: break;
         }
     } while(selector != 5);
+    return 0;
+}
+
+int load_user(table & table){
+    ifstream file;
+    file.open("users.txt");
+    if(file) {
+        if (file.peek() == EOF) {
+            cout << "\nNo users present.";
+            return add_user(table);
+        }
+
+        string name;
+        string read_name;
+        cout << "\nWhat is your username? ";
+        getline(cin, name);
+
+        while(getline(file, read_name)){
+            if(read_name == name) {
+                table.importtxt(name);
+            }
+        }
+    }
+
+    else {
+        cout << "\nError reading from file";
+        exit(EXIT_FAILURE);
+    }
+}
+
+int add_user(table & table){
+    ofstream file;
+
     return 0;
 }
 

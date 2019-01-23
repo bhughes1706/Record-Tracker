@@ -7,8 +7,9 @@
 
 #include "node.h"
 #include "records.h"
+#include "user.h"
 
-class table {
+class table: public user {
 public:
     table();
     table(const table &);
@@ -17,8 +18,8 @@ public:
     int delete_node(string&, string&);
     int display_all() const;
     int count() const;
-    int edit(string entry);
-    void importtxt();
+    int edit(string);
+    int importtxt(string);
     void importcsv();
     int edit(string&, string&);
 protected:

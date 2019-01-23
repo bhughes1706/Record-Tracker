@@ -13,5 +13,7 @@ int display_all(table &);
 int edit(table &);
 int delete_item(table &);
 int add(table &);
+int load_user(table &);
+int add_user(table &);
 
 #endif //RECORD_TRACKER_MAIN_H

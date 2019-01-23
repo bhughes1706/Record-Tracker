@@ -111,7 +111,7 @@ void table::deleteAll(node *& head) {
     delete head;
 }
 
-void table::importtxt() {
+table & table::importtxt() {
   string input;
   cout << "\nRemember to keep style: catalog_id, artist, album, label\n"
        << "format, rating, released, release_id, collection_folder, date_added\n"
