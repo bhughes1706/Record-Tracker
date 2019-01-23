@@ -98,6 +98,7 @@ int menu() {
 
 int import(table & table){
     int selector = 0;
+    string name;
     do {
         cout << "\n\n1) Import a .txt file\n"
              << "2) Import .csv file\n";
@@ -112,7 +113,17 @@ int import(table & table){
     } while (selector > 2 || selector <= 0);
 
     switch(selector){
-        case 1: table.importtxt(); break;
+        case 1: {
+            string input;
+            cout << "\nRemember to keep style: catalog_id, artist, album, label\n"
+                 << "format, rating, released, release_id, collection_folder, date_added\n"
+                 << "media_condition, sleeve_condition, and notes\n"
+                 << "Everything should be on a new line. Format should be 2xLP, LP, 78, box, or 7.\n"
+                 << "What is the .txt path file on your computer? ";
+            getline(cin, input);
+            table.importtxt_given(input);
+            break;
+        }
         case 2: table.importcsv(); break;
         default: break;
     }

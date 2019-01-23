@@ -20,6 +20,7 @@ public:
     int count() const;
     int edit(string);
     int importtxt(string);
+    void importtxt_given(string);
     void importcsv();
     int edit(string&, string&);
 protected:
@@ -27,7 +28,6 @@ protected:
     int index;
     void deleteAll(node *&);
     int add(node *&, records *&);
-    void importtxt_given(string);
     void importcsv_given(string);
     int hash(string&);
 };

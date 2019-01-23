@@ -111,16 +111,9 @@ void table::deleteAll(node *& head) {
     delete head;
 }
 
-table & table::importtxt() {
-  string input;
-  cout << "\nRemember to keep style: catalog_id, artist, album, label\n"
-       << "format, rating, released, release_id, collection_folder, date_added\n"
-       << "media_condition, sleeve_condition, and notes\n"
-       << "Everything should be on a new line. Format should be 2xLP, LP, 78, box, or 7.\n"
-       << "What is the .txt path file on your computer? ";
-  getline(cin, input);
+int table::importtxt(string name) {
 
-  importtxt_given(input);
+    return 0;
 }
 
 void table::importcsv() {
