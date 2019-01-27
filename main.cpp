@@ -24,7 +24,7 @@ int main() {
             cin.clear();
             cin.ignore(1000, '\n');
         }
-        yesno = toupper(yesno);
+        yesno = (char)toupper(yesno);
     } while (yesno != 'Y' && yesno != 'N');
 
     if(yesno == 'Y')
@@ -56,12 +56,13 @@ int load_user(table & table){
 
         string name;
         string read_name;
-        cout << "\nWhat is your username? ";
+        cout << "\nWhat is your username (must use correct case): ";
         getline(cin, name);
 
         while(getline(file, read_name)){
+
             if(read_name == name) {
-                table.importtxt(name);
+                return table.importtxt(name);
             }
         }
     }
@@ -70,12 +71,47 @@ int load_user(table & table){
         cout << "\nError reading from file";
         exit(EXIT_FAILURE);
     }
+
+    return 1;
 }
 
 int add_user(table & table){
     ofstream file;
+    file.open("users.txt", ios::app);
+    string user;
 
-    return 0;
+    if(file) {
+        while (user.length() == 0) {
+            cout << "\nWhat would you like your username to be? ";
+            getline(cin, user);
+
+            if (user.length() != 0) {
+                if(check_username(user))
+                    file << user;
+                else {
+                    cout << "\nUsername already exists, choose another.\n";
+                    user = nullptr;
+                }
+            }
+            else
+                cout << "Please enter a username\n";
+        }
+    }
+    else{
+        cout << "\nError reading from file.";
+        exit(EXIT_FAILURE);
+    }
+    file.close();
+
+    string fileName = user + ".txt";
+    file.open(fileName);
+
+    if(file)
+        return 1;
+    else{
+        cout << "\nError creating new file for storing information\n";
+        exit(EXIT_FAILURE);
+    }
 }
 
 int menu() {
@@ -175,4 +211,19 @@ int delete_item(table & table){
 int add(table & table){
     //table.add();
     return 0;
+}
+
+int check_username(string user_new){
+    ifstream file;
+    file.open("users.txt");
+    if(file){
+        if(file.peek() == EOF)
+            return 1;
+
+        string get_name;
+        while(getline(cin, get_name)){
+            if(user_new == get_name)
+                return 1;
+        }
+    }
 }
