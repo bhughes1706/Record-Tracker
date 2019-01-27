@@ -12,7 +12,7 @@ class seventy_eights: public records {
         return records::display();
     };
     int edit() override;
-    int display_options() const override;
+    int display_options() const;
 };
 
 

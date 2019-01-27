@@ -6,6 +6,7 @@
 #include "seventy_eights.h"
 #include "boxset.h"
 
+
 int main() {
     int selector;
     char yesno;
@@ -24,24 +25,30 @@ int main() {
             cin.clear();
             cin.ignore(1000, '\n');
         }
-        yesno = (char)toupper(yesno);
-    } while (yesno != 'Y' && yesno != 'N');
 
-    if(yesno == 'Y')
-        load_user(table);
-    else if(yesno == 'N')
-        add_user(table);
+        yesno = (char)toupper(yesno);
+
+        if(yesno == 'Y') {
+            if (!load_user(table)) {
+                yesno = 'x';
+            }
+        }
+        else if(yesno == 'N') {
+            if (!add_user(table))
+                yesno = 'x';
+        }
+
+    } while (yesno != 'Y' && yesno != 'N');
 
     do {
         selector = menu();
         switch (selector) {
-            case 1: import(table); break;
-            case 2: display_all(table); break;
-            case 3: edit(table); break;
-            case 4: delete_item(table);
+            case 1: display_all(table); break;
+            case 2: edit(table); break;
+            case 3: delete_item(table);
             default: break;
         }
-    } while(selector != 5);
+    } while(selector != 4);
     return 0;
 }
 
@@ -54,15 +61,32 @@ int load_user(table & table){
             return add_user(table);
         }
 
-        string name;
-        string read_name;
-        cout << "\nWhat is your username (must use correct case): ";
-        getline(cin, name);
+        string name, read_name, password, password_entry;
+        int tries = 0;
 
-        while(getline(file, read_name)){
+        cout << "\nWhat is your username (must use correct case) // Enter 'test' for test entries: ";
+        getline(cin, name);
+        if(!check_username(name)) {
+            cout << "\nUser name not found.";
+        }
+
+        while(getline(file, read_name)) {
 
             if(read_name == name) {
-                return table.importtxt(name);
+                getline(file, password);
+                while(password != password_entry){
+                    cout << "\nWhat is your password? // enter 'password' for test entries: ";
+                    getline(cin, password_entry);
+                    if(password != password_entry) {
+                        ++tries;
+                        cout << "\nYou have " << 3 - tries << " attempts left.\n";
+                    }
+                    if(tries == 3){
+                        cout << "\nYou've reached your maximum password attempts.\n";
+                        exit(0);
+                    }
+                }
+                return import(name, table);
             }
         }
     }
@@ -72,7 +96,7 @@ int load_user(table & table){
         exit(EXIT_FAILURE);
     }
 
-    return 1;
+    return 0;
 }
 
 int add_user(table & table){
@@ -87,12 +111,12 @@ int add_user(table & table){
             getline(cin, user);
 
             if (user.length() != 0) {
-                if(check_username(user)) {
+                if(!check_username(user)) {
                     while(password.length() < 6) {
                         cout << "What would you like your password to be (at least 6 characters)?: ";
                         getline(cin, password);
                     }
-                    file << user << hash_password(password);
+                    file << "\n" << user << "\n" << password;
                 }
                 else {
                     cout << "\nUsername already exists, choose another.\n";
@@ -123,8 +147,8 @@ int add_user(table & table){
 int menu() {
     int selector;
     do {
-        cout << "\n\nWould you like to: \n1) Import Database \n2) Display entire database"
-             << "\n3) Edit current database \n4) Delete current database \n5) Exit\n"
+        cout << "\n\nWould you like to: \n1) Display entire database"
+             << "\n2) Edit current database \n3) Delete current database \n4) Exit\n"
              << "Enter option: ";
         cin >> selector; cin.ignore(1000, '\n');
         if(cin.fail()) {
@@ -132,44 +156,29 @@ int menu() {
             cin.ignore(1000, '\n');
             selector = 0;
         }
-        if(selector > 5 || selector <= 0)
+        if(selector > 4 || selector <= 0)
             cout << "\n\nPlease enter valid number.";
-    } while(selector > 5 || selector <= 0);
+    } while(selector > 4 || selector <= 0);
     return selector;
 }
 
-int import(table & table){
-    int selector = 0;
-    string name;
-    do {
-        cout << "\n\n1) Import a .txt file\n"
-             << "2) Import .csv file\n";
-        cin >> selector; cin.ignore(1000, '\n');
-        if(cin.fail()){
-            cin.clear();
-            cin.ignore(1000, '\n');
-            selector = 0;
-        }
-        if(selector > 2 || selector <= 0)
-            cout << "\n\nPlease enter valid number.";
-    } while (selector > 2 || selector <= 0);
+int import(string user, table & table){
+   ifstream file;
+   file.open(user + ".txt");
+   if(file && file.peek() != EOF){
+       record_info info;
+   }
+   else{
+       file.open(user + ".csv");
+       if(file && file.peek() != EOF){
+           record_info info;
 
-    switch(selector){
-        case 1: {
-            string input;
-            cout << "\nRemember to keep style: catalog_id, artist, album, label\n"
-                 << "format, rating, released, release_id, collection_folder, date_added\n"
-                 << "media_condition, sleeve_condition, and notes\n"
-                 << "Everything should be on a new line. Format should be 2xLP, LP, 78, box, or 7.\n"
-                 << "What is the .txt path file on your computer? ";
-            getline(cin, input);
-            table.importtxt_given(input);
-            break;
-        }
-        case 2: table.importcsv(); break;
-        default: break;
-    }
-    return 0;
+
+       }
+       else
+           cout << "\nYour library is empty.\n";
+   }
+   return 1;
 }
 
 int display_all(table & table){
@@ -229,12 +238,12 @@ int check_username(const string user_new){
         string get_name;
         while(getline(file, get_name)){
             if(user_new == get_name)
-                return 0;
+                return 1;
         }
     }
-  return 1;
+  return 0;
 }
 
-string hash_password(const string){
+string cipher(const string){
 
 }
