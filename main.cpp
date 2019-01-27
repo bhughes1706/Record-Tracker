@@ -79,22 +79,28 @@ int add_user(table & table){
     ofstream file;
     file.open("users.txt", ios::app);
     string user;
+    string password;
 
     if(file) {
-        while (user.length() == 0) {
-            cout << "\nWhat would you like your username to be? ";
+        while (user.length() < 2) {
+            cout << "\nWhat would you like your username to be (at least 2 characters)?: ";
             getline(cin, user);
 
             if (user.length() != 0) {
-                if(check_username(user))
-                    file << user;
+                if(check_username(user)) {
+                    while(password.length() < 6) {
+                        cout << "What would you like your password to be (at least 6 characters)?: ";
+                        getline(cin, password);
+                    }
+                    file << user << hash_password(password);
+                }
                 else {
                     cout << "\nUsername already exists, choose another.\n";
-                    user = nullptr;
+                    user.clear();
                 }
             }
             else
-                cout << "Please enter a username\n";
+                cout << "Please enter a valid username\n";
         }
     }
     else{
@@ -213,7 +219,7 @@ int add(table & table){
     return 0;
 }
 
-int check_username(string user_new){
+int check_username(const string user_new){
     ifstream file;
     file.open("users.txt");
     if(file){
@@ -221,9 +227,14 @@ int check_username(string user_new){
             return 1;
 
         string get_name;
-        while(getline(cin, get_name)){
+        while(getline(file, get_name)){
             if(user_new == get_name)
-                return 1;
+                return 0;
         }
     }
+  return 1;
+}
+
+string hash_password(const string){
+
 }

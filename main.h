@@ -16,5 +16,6 @@ int add(table &);
 int load_user(table &);
 int add_user(table &);
 int check_username(string);
+string hash_password(string);
 
 #endif //RECORD_TRACKER_MAIN_H

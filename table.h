@@ -7,9 +7,8 @@
 
 #include "node.h"
 #include "records.h"
-#include "user.h"
 
-class table: public user {
+class table {
 public:
     table();
     table(const table &);

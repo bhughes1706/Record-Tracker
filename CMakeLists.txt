@@ -3,4 +3,4 @@ project(record_tracker)
 
 set(CMAKE_CXX_STANDARD 14)
 
-add_executable(record_tracker main.cpp records.cpp records.h boxset.cpp boxset.h node.cpp node.h seven.cpp seven.h table.cpp table.h seventy_eights.cpp seventy_eights.h main.h twelve.cpp twelve.h user.cpp user.h)
+add_executable(record_tracker main.cpp records.cpp records.h boxset.cpp boxset.h node.cpp node.h seven.cpp seven.h table.cpp table.h seventy_eights.cpp seventy_eights.h main.h twelve.cpp twelve.h)
