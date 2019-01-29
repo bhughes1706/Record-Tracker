@@ -8,14 +8,13 @@
 
 //prototypes for main.cpp
 int menu();
-int import(string, table &);
+int import(std::string, table &);
 int display_all(table &);
 int edit(table &);
 int delete_item(table &);
 int add(table &);
 int load_user(table &);
 int add_user(table &);
-int check_username(string);
-string cipher(string);
+int check_username(std::string);
 
 #endif //RECORD_TRACKER_MAIN_H

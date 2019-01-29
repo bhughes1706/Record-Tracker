@@ -7,35 +7,36 @@
 #ifndef RECORD_TRACKER_RECORDS_H
 #define RECORD_TRACKER_RECORDS_H
 
-using namespace std;
+#include <boost/noncopyable.hpp>
 
+//record_info definitions are found in records.cpp
 class record_info{
 public:
-    int display();
-    int display_options() const;
-    void edit_string(int, string);
-    void edit_int(int, int);
-    string get_artist() const {
+    int display() const;
+    void display_options() const;
+    int edit_string(int, std::string);
+    int edit_int(int, int);
+    const std::string get_artist() const {
         return artist;
     }
-    string get_album() const {
+    const std::string get_album() const {
         return album;
     }
 
 protected:
-    string catalog_id;
-    string artist;
-    string album;
-    string label;
-    string format;
+    std::string catalog_id;
+    std::string artist;
+    std::string album;
+    std::string label;
+    std::string format;
     int rating;
     int released;
     int release_id;
-    string collection_folder;
-    string date_added;
-    string media_condition;
-    string sleeve_condition;
-    string notes;
+    std::string collection_folder;
+    std::string date_added;
+    std::string media_condition;
+    std::string sleeve_condition;
+    std::string notes;
 
     float purchase_price;
     float value;
@@ -43,21 +44,21 @@ protected:
     bool seven;
 };
 
-class records {
+class records: private boost::noncopyable {
 public:
-    virtual int display() = 0; //pure virtual
+    virtual int display() const=0; //pure virtual
     virtual int edit();
-    virtual int display_options() const {
-        return info.display_options();
+    virtual void display_options() const {
+        info.display_options();
     };
-    string get_artist() const {
+    std::string get_artist() const {
         return info.get_artist();
     };
-    string get_album() const {
+    std::string get_album() const {
         return info.get_album();
     }
-    string enter_string();
-    int enter_number();
+    int enter_string(int);
+    int enter_number(int);
 
 protected:
     //CANNOT allocate memory for this object

@@ -9,6 +9,6 @@ int seventy_eights::edit() {
     return 0;
 }
 
-int seventy_eights::display_options() const {
+void seventy_eights::display_options() const {
 
 }

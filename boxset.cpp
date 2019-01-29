@@ -6,12 +6,11 @@
 
 int boxset::edit() {
     records::display_options();
-    cout << "";
     return 0;
 }
 
-int boxset::display_options() const {
+void boxset::display_options() const {
 
-    return 0;
+    return;
 }
 

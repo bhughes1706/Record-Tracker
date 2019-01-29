@@ -9,11 +9,11 @@
 
 class twelve: public records {
 public:
-    int display() override {
+    int display() const override {
         return records::display();
     };
     int edit() override;
-    int display_options() const override;
+    void display_options() const override;
 };
 
 

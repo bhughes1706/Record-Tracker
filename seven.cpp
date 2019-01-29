@@ -4,9 +4,8 @@
 
 #include "seven.h"
 
-int seven::display_options() const {
+void seven::display_options() const {
 
-    return 0;
 }
 
 int seven::edit() {

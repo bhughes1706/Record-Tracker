@@ -8,7 +8,6 @@ int twelve::edit() {
     return records::edit();
 }
 
-int twelve::display_options() const {
+void twelve::display_options() const {
     records::display_options();
-    return 0;
 }

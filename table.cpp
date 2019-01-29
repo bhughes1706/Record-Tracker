@@ -1,31 +1,24 @@
 // This is the table, which is an array of LLL. I'm avoiding templates, because
-// I need the practice and I'm a glutton for punishment, apparently
+// practice is good and I'm a glutton for punishment, apparently
 
 char DELIM = ',';
 
 #include "table.h"
-#include <string>
-#include <iostream>
-#include <fstream>
 
-using namespace std;
-
-table::table(){
-    index = 29;
+table::table(): index(29) {
     head = new node * [index];
     for(int i = 0; index > i; ++i)
         head[i] = nullptr;
 }
 
-table::table(const table & copy) {
-    index = copy.index;
+table::table(const table & copy): index(copy.index) {
     head = new node * [index];
     for(int i = 0; index > i; ++i)
         head[i] = copy.head[i];
 }
 
 int table::add(records *& to_add) {
-    string artist = to_add->get_artist();
+    std::string artist = to_add->get_artist();
     int hash = this->hash(artist);
 
     if(!head[hash]) {
@@ -53,7 +46,7 @@ int table::add(node *& head, records *& record) {
     return 0;
 }
 
-int table::delete_node(string & artist, string & album) {
+int table::delete_node(const std::string & artist, const std::string & album) {
     int hash = this->hash(artist);
     node * current = head[hash];
 
@@ -100,7 +93,7 @@ int table::count() const {
     return count;
 }
 
-int table::edit(string entry) {
+int table::edit(std::string entry) {
     return 0;
 }
 
@@ -111,30 +104,30 @@ void table::deleteAll(node *& head) {
     delete head;
 }
 
-int table::importtxt(string name) {
+int table::importtxt(std::string name) {
 
     return 0;
 }
 
 void table::importcsv() {
-    string input;
-    cout << "\nRemember to keep style: catalog_id, artist, album, label\n"
+    std::string input;
+    std::cout << "\nRemember to keep style: catalog_id, artist, album, label\n"
          << "format, rating, released, release_id, collection_folder, date_added\n"
          << "media_condition, sleeve_condition, and notes\n"
          << "Everything should be on a new line. Format should be 2xLP, LP, 78, box, or 7.\n"
          << "What is the .csv path file on your computer? ";
-    getline(cin, input);
+    getline(std::cin, input);
 
     //importcsv_given(input);
 
     importcsv_given("record_collection.csv");
 }
 
-void table::importtxt_given(string input) {
+void table::importtxt_given(std::string input) {
 
 }
 
-int table::edit(string & artist, string & album) {
+int table::edit(std::string & artist, std::string & album) {
     int hash = this->hash(artist);
     node * current = head[hash];
 
@@ -148,23 +141,23 @@ int table::edit(string & artist, string & album) {
     return current->edit();
 }
 
-void table::importcsv_given(string input) {
+void table::importcsv_given(std::string input) {
     if(input.empty())
         return;
-    ifstream file;
+    std::ifstream file;
     file.open(input);
-    string temp;
+    std::string temp;
 
     if(file){
         getline(file, temp, DELIM);
     }
 }
 
-int table::hash(string & artist) {
+int table::hash(const std::string & artist) {
     int total = 0, i = 0;
     //counts each character
     for(; i < artist.length(); ++i){
-        artist[i] += total;
+        total = artist[i];
     }
     return total % index;
 }

@@ -7,28 +7,31 @@
 
 #include "node.h"
 #include "records.h"
+#include <string>
+#include <iostream>
+#include <fstream>
 
-class table {
+class table: private boost::noncopyable {
 public:
     table();
     table(const table &);
     ~table();
     int add(records *&);
-    int delete_node(string&, string&);
+    int delete_node(const std::string&, const std::string&);
     int display_all() const;
     int count() const;
-    int edit(string);
-    int importtxt(string);
-    void importtxt_given(string);
+    int edit(std::string);
+    int importtxt(std::string);
+    void importtxt_given(std::string);
     void importcsv();
-    int edit(string&, string&);
+    int edit(std::string&, std::string&);
 protected:
     node ** head; //array of LLL
-    int index;
+    const int index;
     void deleteAll(node *&);
     int add(node *&, records *&);
-    void importcsv_given(string);
-    int hash(string&);
+    void importcsv_given(std::string);
+    int hash(const std::string&);
 };
 
 

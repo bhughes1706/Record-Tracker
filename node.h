@@ -26,10 +26,10 @@ public:
     int added() const {
         return record ? 1 : 0;
     } //implemented here
-    string get_artist() const {
+    std::string get_artist() const {
         return record->get_artist();
     };
-    string get_album() const {
+    std::string get_album() const {
         return record->get_album();
     }
 protected:
