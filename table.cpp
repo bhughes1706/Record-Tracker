@@ -11,12 +11,8 @@ table::table(): index(29) {
         head[i] = nullptr;
 }
 
-table::table(const table & copy): index(copy.index) {
-    head = new node * [index];
-    for(int i = 0; index > i; ++i)
-        head[i] = copy.head[i];
-}
-
+//adds one record to table 'collection'
+//wrapper for protected recursive fx
 int table::add(records *& to_add) {
     std::string artist = to_add->get_artist();
     int hash = this->hash(artist);
@@ -29,6 +25,7 @@ int table::add(records *& to_add) {
     return this->add(head[hash], to_add) ? 1 : 0;
 }
 
+//caller: table::add(records *&)
 int table::add(node *& head, records *& record) {
     node *current = head;
 
@@ -46,6 +43,7 @@ int table::add(node *& head, records *& record) {
     return 0;
 }
 
+//deletes one node in table
 int table::delete_node(const std::string & artist, const std::string & album) {
     int hash = this->hash(artist);
     node * current = head[hash];
@@ -67,12 +65,14 @@ int table::delete_node(const std::string & artist, const std::string & album) {
     return 0;
 }
 
+//dtor
 table::~table(){
     int i = 0;
     for(; i < index; ++i)
         deleteAll(head[i]);
 }
 
+//displays all, returns count of all displayed
 int table::display_all() const {
     if(!head)
       return 0;
@@ -84,6 +84,7 @@ int table::display_all() const {
     return count;
 }
 
+//returns total number of records
 int table::count() const {
     int count = 0, i = 0;
     for(; i < index; ++i) {
@@ -109,6 +110,7 @@ int table::importtxt(std::string name) {
     return 0;
 }
 
+// // // in dev
 void table::importcsv() {
     std::string input;
     std::cout << "\nRemember to keep style: catalog_id, artist, album, label\n"
@@ -123,10 +125,12 @@ void table::importcsv() {
     importcsv_given("record_collection.csv");
 }
 
+// // in dev
 void table::importtxt_given(std::string input) {
 
 }
 
+//edits one record, returns callee
 int table::edit(std::string & artist, std::string & album) {
     int hash = this->hash(artist);
     node * current = head[hash];
@@ -141,6 +145,7 @@ int table::edit(std::string & artist, std::string & album) {
     return current->edit();
 }
 
+// // in dev
 void table::importcsv_given(std::string input) {
     if(input.empty())
         return;
@@ -153,6 +158,7 @@ void table::importcsv_given(std::string input) {
     }
 }
 
+//hash function, called by multiple functions
 int table::hash(const std::string & artist) {
     int total = 0, i = 0;
     //counts each character

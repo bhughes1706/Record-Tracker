@@ -1,7 +1,7 @@
-//
-// Created by Brian Hughes on 2019-01-18.
-//
 #include "table.h"
+#include "seven.h"
+#include "seventy_eights.h"
+#include "boxset.h"
 
 #ifndef RECORD_TRACKER_MAIN_H
 #define RECORD_TRACKER_MAIN_H

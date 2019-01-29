@@ -11,10 +11,10 @@
 #include <iostream>
 #include <fstream>
 
+//cannot copy this structure
 class table: private boost::noncopyable {
 public:
     table();
-    table(const table &);
     ~table();
     int add(records *&);
     int delete_node(const std::string&, const std::string&);

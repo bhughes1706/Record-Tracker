@@ -1,16 +1,9 @@
-#include <fstream>
-#include "records.h"
 #include "main.h"
-#include "table.h"
-#include "seven.h"
-#include "seventy_eights.h"
-#include "boxset.h"
-
 
 int main() {
-    int selector;
-    char yesno;
-    table table;
+    int selector; //used for user selection in menus
+    char yesno; //user entry for yes and no questions
+    table table; //creates empty table for filling
 
     std::cout << "\nThis program tracks the performance of your record collection.";
     /*<< "\nYou must have a Discogs collection to use this program."
@@ -162,7 +155,7 @@ int menu() {
     return selector;
 }
 
-int import(std::string user, table & table){
+int import(const std::string user, table & table){
    std::ifstream file;
    file.open(user + ".txt");
    if(file && file.peek() != EOF){

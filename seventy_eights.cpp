@@ -1,6 +1,4 @@
-//
-// Created by Brian Hughes on 2019-01-18.
-//
+// // in dev
 
 #include "seventy_eights.h"
 
