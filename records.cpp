@@ -71,6 +71,9 @@ int records::enter_number(int const select) {
     return info.edit_int(select, entry);
 }
 
+records::records(const record_info & entry): info(entry){}
+
+
 int record_info::display() const {
     std::cout << "\n\nCatalog ID: " << catalog_id
          << "\nArtist: " << artist << "\nAlbum: " << album

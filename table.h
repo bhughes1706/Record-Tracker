@@ -25,7 +25,7 @@ public:
     void importtxt_given(std::string);
     void importcsv();
     int edit(std::string&, std::string&);
-protected:
+private:
     node ** head; //array of LLL
     const int index;
     void deleteAll(node *&);

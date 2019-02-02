@@ -4,6 +4,7 @@
 char DELIM = ',';
 
 #include "table.h"
+#include <boost/
 
 table::table(): index(29) {
     head = new node * [index];
@@ -67,8 +68,7 @@ int table::delete_node(const std::string & artist, const std::string & album) {
 
 //dtor
 table::~table(){
-    int i = 0;
-    for(; i < index; ++i)
+    for(int i = 0; i < index; ++i)
         deleteAll(head[i]);
 }
 

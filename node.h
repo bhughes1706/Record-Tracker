@@ -32,7 +32,7 @@ public:
     std::string get_album() const {
         return record->get_album();
     }
-protected:
+private:
     records * record;//contains transport
     node * next;
 };

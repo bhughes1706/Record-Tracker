@@ -10,12 +10,13 @@
 
 class boxset: public records {
 public:
+    explicit boxset(const int);
     int display() const override {
         return records::display();
     };
     int edit() override;
     void display_options() const override;
-protected:
+private:
     int no_records;
 };
 

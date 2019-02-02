@@ -23,7 +23,8 @@ public:
         return album;
     }
 
-protected:
+
+private:
     std::string catalog_id;
     std::string artist;
     std::string album;
@@ -46,7 +47,7 @@ protected:
 
 class records: private boost::noncopyable {
 public:
-    virtual int display() const=0; //pure virtual
+    virtual int display()const=0; //pure virtual
     virtual int edit();
     virtual void display_options() const {
         info.display_options();
@@ -59,9 +60,10 @@ public:
     }
     int enter_string(int);
     int enter_number(int);
+    explicit records(const record_info &);
 
-protected:
-    //CANNOT allocate memory for this object
+private:
+    //can only create object by above method
     records()=default;
     int edit_object(int);
     record_info info;

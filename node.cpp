@@ -7,49 +7,11 @@
 #include "seven.h"
 
 node::node(records * new_record) {
-    auto * twelves = dynamic_cast<twelve*>(new_record);
-    if(twelves){
-        record = twelves;
-        return;
-    }
 
-    auto * sevens = dynamic_cast<seven*>(new_record);
-    if(sevens){
-        record = sevens;
-        return;
-    }
-
-    auto * seven_eight = dynamic_cast<seventy_eights*>(new_record);
-    if(seven_eight){
-        record = seven_eight;
-        return;
-    }
-
-    auto * box = dynamic_cast<boxset*>(new_record);
-    if(box)
-        record = box;
-    next = nullptr;
 }
 
 node::node(const node & copy) {
-    auto * twelves = dynamic_cast<twelve*>(copy.record);
-    if(twelves)
-        record = twelves;
 
-
-    auto * sevens = dynamic_cast<seven*>(copy.record);
-    if(sevens)
-        record = sevens;
-
-    auto * seven_eight = dynamic_cast<seventy_eights*>(copy.record);
-    if(seven_eight)
-        record = seven_eight;
-
-    auto * box = dynamic_cast<boxset*>(copy.record);
-    if(box)
-        record = box;
-
-    next = nullptr;
 }
 
 int node::display_all() const {
@@ -62,26 +24,7 @@ int node::display_all() const {
 }
 
 node & node::operator=(const node & copy) {
-    if(!copy.record)
-        return *this;
 
-    auto * twelves = dynamic_cast<twelve*>(copy.record);
-    if(twelves)
-        record = twelves;
-
-    auto * sevens = dynamic_cast<seven*>(copy.record);
-    if(sevens)
-        record = sevens;
-
-    auto * seven_eight = dynamic_cast<seventy_eights*>(copy.record);
-    if(seven_eight)
-        record = seven_eight;
-
-    auto * box = dynamic_cast<boxset*>(copy.record);
-    if(box)
-        record = box;
-
-    next = nullptr;
 
     return *this;
 }

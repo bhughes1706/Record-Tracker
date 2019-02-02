@@ -14,3 +14,7 @@ void boxset::display_options() const {
     return;
 }
 
+boxset::boxset(const int): records() {
+
+}
+
