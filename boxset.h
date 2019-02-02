@@ -10,7 +10,7 @@
 
 class boxset: public records {
 public:
-    explicit boxset(const int);
+    explicit boxset(int, record_info);
     int display() const override {
         return records::display();
     };

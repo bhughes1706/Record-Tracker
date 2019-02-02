@@ -1,10 +1,10 @@
 // This is the table, which is an array of LLL. I'm avoiding templates, because
 // practice is good and I'm a glutton for punishment, apparently
 
-char DELIM = ',';
+//char DELIM = ',';
 
 #include "table.h"
-#include <boost/
+//#include <boost/ >
 
 table::table(): index(29) {
     head = new node * [index];

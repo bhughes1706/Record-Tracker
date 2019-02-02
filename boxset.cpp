@@ -11,10 +11,9 @@ int boxset::edit() {
 
 void boxset::display_options() const {
 
-    return;
 }
 
-boxset::boxset(const int): records() {
+boxset::boxset(const int box_num, const record_info entry): records(entry) {
 
 }
 
